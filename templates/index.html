@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-3" style="max-width: {{ max_width }}px">
+    <div class="row">
+        <h1><a href="{{ url_for('index') }}">plttzrrrrr</a></h1>
+      <br>
+      <br>
+      <h4>the palettizer</h4>
+    </div>
+    {% if processed %}
+      <div class="row row-bottom-margin">
+        <figure class="figure row-bottom-margin">
+          <img src="data:image/png;base64, {{ image_pre }}" alt="image before" class="figure-img img-fluid rounded">
+        <figure>
+
+        <table style="width: {{ image_width }}px; margin-bottom: 10px">
+          <tbody>
+            <tr>
+              {% for color_hex, (r, g, b), w in colors %}
+                <td style="width: {{ w }}px; background: {{ color_hex }}; height: {{ thumbnail_height }}px">
+
+                </td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+
+        <figure class="figure">
+          <img src="data:image/png;base64, {{ image_post }}" alt="image after" class="figure-img img-fluid rounded">
+        <figure>
+      </div>
+    {% endif %}
+
+    <div class="row">
+      <form action="" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <div class="custom-file">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+            <input type="file" class="custom-file-input" name="customFile">
+          </div>
+          <label class="my-1 mr-sm-2" for="customNClusters">How many clusters?</label>
+          <select class="custom-select my-1 mr-sm-2" id="customNClusters" name="customNClusters">
+            <label>How many clusters?</label>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6" selected>6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+          </select>
+          <!-- <label class="my-1 mr-sm-2" for="customClusteringAlgo">Which clustering algorithm?</label>
+          <select class="custom-select my-1 mr-sm-2" id="customClusteringAlgo" name="customClusteringAlgo">
+            <option value="KMeans" selected>K-means</option>
+            <option value="GaussianMixture">Gaussian Mixture</option>
+          </select> -->
+        </div>
+        <button type="submit" class="btn btn-outline-primary my-1" name="action" value="upload">Submit</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
