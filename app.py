@@ -8,8 +8,7 @@ from funcs import (
 
 app = Flask(__name__)
 app.secret_key = FLASK_SECRET_KEY
-app_name = 'plttzrrrrr-python'
-
+app_name = 'pltzr-python'
 
 @app.route(f'/{app_name}/image', methods=['GET'])
 def get_image():
@@ -32,7 +31,7 @@ def get_image():
     return send_file(image, mimetype='image/jpeg')
 
 
-@app.route(f'/{app_name}/', methods=['GET', 'POST'])
+@app.route(f'/{app_name}', methods=['GET', 'POST'], strict_slashes=False)
 def index():
     context = {}
     if request.method == 'POST':
@@ -77,6 +76,8 @@ def index():
             hist_sum = sum(hist)
             hist_norm = [int(round(dims_apply[1] * x/hist_sum, 0))
                          for x in hist]
+            hist_norm = [int(round(dims_apply[1]/n_clusters, 0))
+                         for x in range(n_clusters)]
             colors_hex = [rgb2hex(x) for x in colors]
             context['colors'] = list(zip(colors_hex, colors, hist_norm))
 
