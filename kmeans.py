@@ -3,9 +3,9 @@ import numpy as np
 
 
 class KMeans():
-    np.seterr(divide='ignore', invalid='ignore')
 
-    def __init__(self, n_clusters=2, max_iter=200, random_state=None, tol=1e-4):
+    def __init__(self, n_clusters=2, max_iter=200,
+                 random_state=None, tol=1e-4):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
         self.random_state = random_state
@@ -33,7 +33,8 @@ class KMeans():
                 if X_slice.shape[0] > 0:
                     new_centroids[i] = np.nanmean(X_slice, axis=0)
 
-            last_distance = np.linalg.norm(new_centroids - self.centroids, axis=1).sum()
+            last_distance = np.linalg.norm(
+                new_centroids - self.centroids, axis=1).sum()
             self.centroids = deepcopy(new_centroids)
 
             if last_distance < self.tol:
