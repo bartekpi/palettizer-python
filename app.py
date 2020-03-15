@@ -1,39 +1,21 @@
 from flask import Flask, render_template, request, flash, send_file
 
-from config import FLASK_SECRET_KEY, N_CLUSTERS, ALLOWED_EXTENSIONS
+from config import (
+    FLASK_SECRET_KEY, APP_NAME, APP_TITLE, APP_REPO,
+    N_CLUSTERS, ALLOWED_EXTENSIONS)
+
 from funcs import (
     receive_image, generate_image, image_to_array, get_clusters,
     get_colors_from_clf, image_resize, get_image_from_clf, rgb2hex
     )
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path=f'/{APP_NAME}/static')
 app.secret_key = FLASK_SECRET_KEY
-app_name = 'pltzr-python'
-
-@app.route(f'/{app_name}/image', methods=['GET'])
-def get_image():
-    parms = {}
-    for arg in 'whrgb':
-        try:
-            parms[arg] = int(request.args[arg])
-        except:
-            return generate_image(100, 100, '#ff0000')
-
-    for arg in 'wh':
-        parms[arg] = max(25, min(250, parms[arg]))
-
-    for arg in 'rgb':
-        parms[arg] = max(0, min(255, parms[arg]))
-
-    color = (parms['r'], parms['g'], parms['b'])
-
-    image = generate_image(parms['w'], parms['h'], color)
-    return send_file(image, mimetype='image/jpeg')
 
 
-@app.route(f'/{app_name}', methods=['GET', 'POST'], strict_slashes=False)
+@app.route(f'/{APP_NAME}/', methods=['GET', 'POST'], strict_slashes=False)
 def index():
-    context = {}
+    context = dict(app_name=APP_NAME, app_title=APP_TITLE, app_repo=APP_REPO)
     if request.method == 'POST':
         if request.form['action'] == 'upload':
             file_in = request.files['customFile']
