@@ -15,9 +15,6 @@ docker_run:
 docker_push:
 	docker push ${DOCKER_REPO}/${DOCKER_NAME}
 
-gcloud_submit:
-	gcloud builds submit --tag eu.gcr.io/${PROJECT_ID}/${DOCKER_NAME}
-
 gcloud_deploy:
 	gcloud beta run deploy ${DOCKER_NAME} \
 		--image eu.gcr.io/${PROJECT_ID}/${DOCKER_NAME} \
