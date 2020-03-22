@@ -1,3 +1,47 @@
 .row-bottom-margin {
   margin-bottom:0px;
 }
+
+body {
+  font-family: 'Raleway Regular';
+  background-color: #dfe4e8 ;  /* light blue lightened a bit*/
+
+  color: #4c4b58; /* gray */
+}
+
+h1, h2 {
+  font-family: 'Montserrat Medium';
+  color: #6ba0b6; /* blue */
+}
+
+h3, h4 {
+  font-family: 'Montserrat Regular';
+  color: #6ba0b6; /* blue */
+}
+
+a, a:visited, a:active {
+  color: #c81a20; /* red */
+}
+
+a:hover {
+  color: #ba7777; /* pink */
+
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+
+@font-face{
+  font-family: 'Montserrat Regular';
+  src: url('Montserrat-Regular.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: 'Montserrat Medium';
+  src: url('Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: 'Raleway Regular';
+  src: url('Raleway-Regular.ttf') format('truetype');
+}
